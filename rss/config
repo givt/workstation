@@ -1,0 +1,9 @@
+googlereader-login "USER@gmail.com"
+googlereader-password "PASSWD"
+
+urls-source "googlereader"
+googlereader-flag-star "s"
+googlereader-min-items 1000 
+googlereader-show-special-feeds "no" 
+save-path "~/Documents/Rss_txt_notes/"
+text-width 72 
