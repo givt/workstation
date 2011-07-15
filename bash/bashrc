@@ -1,0 +1,73 @@
+[ -z "$PS1" ] && return # if not running interactively, don't do anything
+
+# Base section {
+    shopt -s checkwinsize   # update LINES and COLUMNS after each command
+    shopt -s cdspell        # ignore type errors in cd command
+    export PROMPT_COMMAND='history -a' # append each cmd to the history
+    export HOST=`hostname`
+    export EDITOR=vim
+    export VIEWER=vim
+    export PAGER=most
+# }
+
+# History section {
+    HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups  # no duplicate lines 
+    HISTCONTROL=ignoreboth  # ... or force ignoredups and ignorespace
+    shopt -s cmdhist        # multiline to one line
+    shopt -s histappend     # append to the history file, don't overwrite it
+    HISTSIZE=20000          # setting see HISTSIZE and HISTFILESIZE in man bash
+    HISTFILESIZE=200000
+# }
+
+# PATH section {
+    [ -d "${HOME}/bin" ] && PATH="$HOME/bin:${PATH}"
+    [ -d "${HOME}/.bin" ] && PATH="$HOME/.bin:${PATH}"
+    [ -d "${HOME}/sbin" ] && PATH="$HOME/sbin:${PATH}"
+    [ -d "${HOME}/.sbin" ] && PATH="$HOME/.sbin:${PATH}"
+    [ -d "${HOME}/var/bin" ] && PATH="$HOME/var/bin:${PATH}"
+    [ -d "${HOME}/var/sbin" ] && PATH="$HOME/var/sbin:${PATH}"
+    export PATH
+
+    [ -d ~/man ] && MANPATH=~/man:"${MANPATH}"
+    [ -d ~/.man ] && MANPATH=~/.man:"${MANPATH}"
+    export MANPATH
+# }
+
+# Color section {
+    force_color_prompt=yes
+    if [ -n "$force_color_prompt" ]; then
+        if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+            color_prompt=yes
+        else
+            color_prompt=
+        fi
+    fi
+
+    if [ "$color_prompt" = yes ]; then
+	if [ $(id -u) -eq 0 ]; then
+		PS1='\[\033[00m\]\[\e[1;31m\]!!!root!!!:\[\033[01;34m\]\w\[\033[00m\]\$ '
+	else
+        	PS1='\[\033[00m\]desk:\[\033[01;34m\]\w \[\033[0;36m\]$(__git_ps1 "(%s)") \[\033[00m\]\$ '
+	fi
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    fi
+    unset color_prompt force_color_prompt
+
+    if [ -x /usr/bin/dircolors ]; then  # ls command color support
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    fi
+# }
+
+# Alias definitions section {
+    [ -f ${HOME}/.bash_colors ]       && source ${HOME}/.bash_colors
+    [ -f ${HOME}/.bash_aliases ]      && source ${HOME}/.bash_aliases
+    [ -f ${HOME}/.bash_functions ]    && source ${HOME}/.bash_functions
+    [ -f ${HOME}/.bash_rugged ]       && source ${HOME}/.bash_rugged
+# }
+
+# Programmable completion section {
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+        source /etc/bash_completion
+    fi
+# }

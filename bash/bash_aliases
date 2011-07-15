@@ -1,0 +1,155 @@
+# One char {
+    alias h='history'
+    alias g='grep -E -i -s --color=always'
+    alias c='cat'
+    alias p='ping'
+    alias f='find'
+    alias v='vim'
+    alias j='jobs -l'
+    alias l='ls -CF'
+    alias m='more'
+    alias e='echo'
+    alias w='watch -d -n 1'
+# }
+
+# Two chars {
+    alias po='popd'
+    alias pu='pushd'
+    alias gb='pushd ~/bin'
+    alias hh='history|grep'
+    alias hg='history|grep'
+    alias ec='echo'
+    alias pg='less'
+    alias du='du -kh'
+    alias df='df -kTh'
+    alias tf='sudo tail -f /var/log/syslog|grcat conf.log'
+    alias ss='sudo su -'
+    alias ls='ls --color=auto'
+    alias ll='ls -l'
+    alias la='ls -A'
+    alias sl='ls' 
+    alias kk='ll'
+    alias xs='cd'
+    alias vf='cd'
+    alias mc='mc -b'
+    alias mo='more'
+    alias tt='twidge update'
+# }
+
+# More history {
+    alias h='history'
+    alias hh='history|grep'
+    alias hg='history|grep'
+# }
+
+# More cd {
+    alias ..='cd ..'
+    alias ...='cd ../..'
+    alias ....='cd ../..'
+    alias cd..='cd ..'
+# }
+
+# System {
+    alias chomd="chmod"
+    alias evn="env"
+    alias exit='clear && exit'
+    alias watch='watch -d'
+    alias dmesg='dmesg|tail -n 20|ccze -A'
+    alias lsof='sudo lsof -i -P|ccze -A'
+    alias iotop='sudo iotop'
+    alias ipp='iptables'
+    alias ipl='iptables -L -n --line-number'
+    alias top='htop'
+    alias duck='du -h --max-depth=1'
+    alias pstree='pstree -h|ccze -A'
+    alias date='date +%H:%M:%S\ %Y-%m-%d\ %a\ %b |ccze -A'
+    alias tail='grc tail'
+    alias traceroute='grc traceroute'
+    alias cl='/usr/bin/grc -es --colour=auto'
+    alias diff='cl diff'
+    alias make='cl make'
+    alias gcc='cl gcc'
+    alias netstat='cl netstat'
+    alias ping='cl ping'
+    alias traceroute='cl /usr/sbin/traceroute'
+    alias grep='grep --color=auto'
+    alias mann='man'
+# }
+
+# Application {
+    alias mc='mc -b'
+    alias rss='newsbeuter'
+    alias gm='gmail_show.sh'
+# }
+
+# Dirs shortcuts {
+    alias po='popd'
+    alias pu='pushd'
+    alias gb='pushd ~/bin'
+# }
+
+# More ls {
+    alias ls='ls --color=auto'
+    alias ll='ls -l'
+    alias la='ls -A'
+    alias l='ls -CF'
+    alias sl='ls' 
+    alias kk='ll'
+# }
+
+# More make {
+    alias mkae='make'
+    alias maek='make'
+# }
+
+# More more {
+    alias m='more'
+    alias mo='more'
+    alias mor='more'
+    alias moer='more'
+    alias mroe='more'
+    alias moew='more'
+# }
+
+# More echo {
+    alias e='echo'
+    alias ec='echo'
+    alias eho='echo'
+    alias ech='echo'
+    alias ecoh='echo'
+# }
+
+# Apt-get {
+    alias luk='sudo apt-cache search'
+    alias get='sudo apt-get install'
+    alias show='sudo apt-cache show'
+# }
+
+# Git {
+    alias gitv='tig'
+    alias git-cola='git-cola --style=dark'
+# }
+
+# Twitter {
+    alias tt='twidge update'
+    alias tweet='twidge update'
+    alias replies='twidge lsreplies'
+    alias recent='twidge lsrecent'
+# }
+
+# Igor's functions ala aliases {
+    function ff () { /usr/bin/find . -name "*$@*" ; }
+    function fr () { /usr/bin/find ~/rugg/rmf -name "*$@*" ; }
+    function ps () { /bin/ps $@ | ccze -A; }
+    function strace () { (/usr/bin/strace -Ff $@ | ccze -A ) 2>&1 | grep '^[^\(]\+'; }
+    function ltrace () { (/usr/bin/ltrace -S -n 3 $@ | ccze -A ) 2>&1 | grep '^[^\(]\+'; }
+    function pgrep  () { /usr/bin/pgrep -l $@ | ccze -A; }
+    function rconsole () { echo -ne "\017"; }
+    function hex2dec  () { echo $[$1]; }
+    function dec2hex  () { echo $1|a '{printf("%x\n", $1)}'; }
+    function dec2bin  () { echo "ibase=10;obase=2;$1"|bc -l; }
+    function 1pgrep () { 
+        #/usr/bin/pgrep -l $@ | ccze -A
+        /bin/ps $@ | ccze -A
+    }
+# }

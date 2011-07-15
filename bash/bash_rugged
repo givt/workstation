@@ -1,0 +1,37 @@
+# Rugged related {
+    alias rr='pushd ${HOME}/rugg'
+# }
+
+# Rugg setup {
+    rdev='192.168.0.2'  # ppc mgmt port
+
+    function tags_generate () {
+        git ls-files|grep "\.[ch]$" >> cscope.files
+        rm -f cscope.out tags
+        cscope -b -q
+        ctags -R --c-kinds=+p --fields=+S -L cscope.files
+        CSCOPE_DB=~/rugg/rmf/cscope.out
+        export CSCOPE_DB
+    }
+
+    function mm () {
+        pushd ~/rugg/rmf
+        tags_generate
+    }
+
+    function rooton_rdev () { 
+            ssh -p 222 root@${rdev}
+    }
+
+    function cmdon_rdev () { 
+            ssh -p 222 root@${rdev} "${1}"
+    }
+
+    function cmdon_rdev_tailf-syslog () { 
+            ssh -p 222 root@${rdev} "tail -f /var/log/syslog"
+    }
+
+    function cmdon_rdev_tailf-authlog () { 
+            ssh -p 222 root@${rdev} "tail -f /var/log/syslog"
+    }
+# }

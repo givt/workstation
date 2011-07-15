@@ -1,0 +1,22 @@
+# updating locate db, I just always forget updatedb.conf
+function upd () {
+    echo -n "Updating locatedb..."
+    sudo updatedb --prunepaths="/tmp /cdrom /proc /var/tmp /usr/tmp ~/tmp /mnt" 
+    echo " done."
+}
+
+# ps of current user procceses
+function psm () { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command; }
+
+# get internal and external IP adresses
+function ipa()              
+{
+    # todo: add mii-tool
+    /sbin/ifconfig eth0|awk '/inet/ { print $2 } '|sed -e s/addr://|head -1
+}
+
+# translate with lingvo
+function trans() { links http://lingvo.yandex.ru/cgi-bin/lingvo.pl?text=$1; }
+
+_exit() { clear; }
+trap _exit 0

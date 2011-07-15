@@ -1,0 +1,297 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Notes { "
+    "   Vimrc of Igor Tsinman igor.tsinman(at)gmail(dot)com 
+    "   Version: 2010/06/17
+    "   Blog post:  
+    "       http://tsinmanru.wordpress.com/XXX
+    "   Raw version: 
+    "       http://XXX
+    "   Howto install:
+    "       http://XXX
+    "   Howto upgrade:
+    "       http://XXX
+    "   Sections:
+    "       Basics settings
+    "       Core settings
+    "       Terminal settings
+    "       Windowing settings
+    "       Color scheme settings
+    "       Status line settings
+    "       Search settings
+    "       Syntax and filetypes settings
+    "       Development environment settings
+    "       Spelling correction settings
+    "       Folding settings
+    "       Plugin settings
+    "       Mapping settings
+    "       Abbreviations
+    "       Functions
+    "
+    "   Plugins:
+    "       Taglist
+    "       Tabbar
+    "       MRU
+    "       NERD
+    "       CScope
+    "       Git 
+    "       Fuf       
+" }
+
+" Basics settings {
+        " Use Vim settings, rather than Vi settings (much better!).
+        " This must be first, because it changes other options as a side effect.
+    set nocompatible
+" }
+
+" Core settings {
+        " keep N lines of history (for various purposes)
+        " merely a fallback (see viminfo)
+    set history=100
+
+        " read/write a .viminfo file
+        "       'N  - keep the registeres for N files
+        "       "N  - how many lines to save per register
+        "       fN  - keep global regs? yes: N==1; no N==0
+        "       :N  - keep N :commands
+        "       /N  - keep N search patterns
+        "       @N  - keep N items of input-line history
+        "             see ':help input()'
+        "       h   - no hlsearch when starting up
+    set viminfo='250,\"250,f1,:500,/500,@500,h
+
+        " all stuff in git, no need backup
+    set nobackup
+    set nowb
+    set noswapfile
+
+    set autowrite          " auto saves changes when quitting and swiching buffer
+    set autoread            " auto read when a file is changed from the outside
+    set hidden              " allow switching buffers without writing to disk
+    set mousehide           " do I need it?
+
+    set listchars=tab:>-,trail:·,eol:$  " catch trailing whitespace with :[no]list
+
+    let mapleader = ","     " remap from \ to ,
+    let g:mapleader = ","
+" }
+
+" Terminal settings {
+        " allow backspacing (instead of "x")over everything in insert mode:
+        " allow deleting the character in front of the cursor
+        " allow deleting the white space at the start of the line
+    set backspace=indent,eol,start " XXX
+
+    set encoding=utf8
+    set visualbell t_vb=    " turn off error beep/flash
+    set novisualbell        " turn off visual bell
+    set noerrorbells        " no sound on errors
+    set t_RV=               " don't check the terminal version
+    set title               " show title in console title bar
+    set ttyfast             " smoother changes
+" }
+
+" Windowing settings {
+    set equalalways         " keep windows equal when splitting (default)
+    set eadirection=hor     " ver/hor/both - where does equalalways apply
+    set winheight=6         " height of current window
+    set scrolloff=3         " keep 3 lines when scrolling
+        " restore cursor position
+    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+    " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+
+" }
+
+" Color scheme settings {
+    " or darkspectrum
+    colorscheme desert
+" }
+
+" Status line settings {
+    set laststatus=2    " always show a status line (with the current filename)
+    set ruler           " show the cursor position all the time
+    set showcmd         " display incomplete commands
+    "set cmdheight=2    " the commandbar height
+    set wildmenu        " nice menu when completing commands
+    set wildmode=list:longest,full " list possibilities on tab completion
+    set wildignore=.git,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+    set wildchar=<TAB>  " command-line character for wildcard expansion
+" }
+
+" Search settings {
+    set incsearch       " do incremental searching and show matches while still typing pattern
+    set hlsearch        " highlight matches after they're found
+    set ignorecase      " "xyz" matches "Xyz"
+    set smartcase       " ignorecase only when the pattern is all lower
+    set wrapscan        " if the word is not found at the bottom of the file
+                        " it will try to search for it at the beginning (or nowrap)
+    set magic           " magic on, for regular expressions
+" }
+
+" Syntax and filetypes settings {
+        " Enable file type detection.
+        " Use the default filetype settings, so that mail gets 'tw' set to 72,
+        " 'cindent' is on in C files, etc.
+        " Also load indent files, to automatically do language-dependent indenting.
+    syntax on            " enable syntax highlighting 
+    filetype on          " detect the type of file
+    filetype plugin on   " load filetype plugins
+    filetype indent on   " automatically do language-dependent indenting
+" }
+
+" Development settings {
+        " ref: http://vim.wikia.com/wiki/Indenting_source_code
+        " ref: http://www.linuxdocs.org/HOWTOs/Vim-HOWTO-3.html
+    set number              " line's number
+    let c_comment_strings=1 " highlighting strings inside C comments
+    set noautoindent smartindent                " this is overridden per 
+                                                " filetype below
+    au FileType text setlocal textwidth=70      " for all text files set 
+                                                " 'textwidth' to 70 characters.
+    au FileType cpp,c,sh,pl  set autoindent     " copy the indentation from 
+    " the previous line, when starting a new line (disable for outside copying)
+    au FileType cpp,c,sh,pl  set smartindent    " automatically inserts one 
+    " extra level of indentation in some cases, and works for C-like files
+    au FileType cpp,c,sh,pl  set cindent        " do c-style indenting
+    set tabstop=8           " number of spaces per tab
+    set shiftwidth=4        " affects what happens when you press >>, << or == 
+                            " and how automatic indentation works
+    set softtabstop=4       " treat 4 spaces as a tab when deleting
+    set expandtab           " turns tabs into spaces
+    set smarttab            " affects how <TAB> key presses are interpreted 
+                            " depending on where the cursor is
+    set shiftround          " sets next shift on the next tab level 
+    set fo+=cr              " fix <Enter> for comment
+    if &diff|syntax off|endif " I'm only interested in diff colours
+    set tags+=./tags,tags,~/tags,~/rugg/rmf,~/rugg/rmf/tags "path to ctags files
+    
+    highlight TooLongLine term=reverse ctermfg=Yellow ctermbg=Red
+    match TooLongLine /.\%>81v/ " Match characters past 80 character limitground
+" }
+
+" Spelling correction settings {
+    setlocal spell spelllang=   " spell checking is disabled by default 
+                                " (<F10> toggles en->ru->none)
+    setlocal nospell
+    function ChangeSpellLang()
+        if &spelllang =~ "en_us"
+            setlocal spell spelllang=ru
+            echo "spelllang: ru"
+        elseif &spelllang =~ "ru"
+            setlocal spell spelllang=
+            setlocal nospell
+            echo "spelllang: off"
+        else
+            setlocal spell spelllang=en_us
+            echo "spelllang: en"
+        endif
+    endfunc
+    hi clear SpellBad                   " spelling errors are higlighted using 
+    hi SpellBad cterm=underline,bold    " SpellBad highlighting group
+" }
+
+" Folding settings {
+    set foldenable          " enable folding 
+    set foldmethod=indent   " folding method (good for source code)
+    set foldcolumn=3        " side of the window which indicates 
+                            " open and closed folds
+" }
+
+" Plugin settings {
+    " Taglist plugin { 
+        let Tlist_WinWidth = 50             " The vertically splited 
+                                            " taglist window width
+        let Tlist_Use_Right_Window   = 1    " The vertically splited 
+                                            " taglist window place
+    " }
+    " Tabbar plugin {
+        let g:Tb_SplitBelow = 1
+        let Tb_VSplit = 1
+        let g:Tb_MinSize = 40
+        let g:Tb_MoreThanOne = 3
+        let g:Tb_MapCTabSwitchBufs = 1
+    " }
+    " MRU plugin {
+        let MRU_Max_Entries = 100
+    " }
+" }
+
+" Mapping settings {
+    " F02   Tab bar
+    " F03   
+    " F04    
+    " F05
+    " F06   
+    " F07   
+    " F08   
+    " F09   Tag list 
+    " F10   Folding
+    " F11   Paste outside
+    " F12   Spell
+    "
+    " <Esc>0      switch to the 0 buffer
+    " <Esc>9      switch to the 9 buffer
+    "
+    map <silent> <F2> :TbToggle<CR>             " tabbar.vim
+    map <silent> <F9> :TlistToggle<CR>          " taglist.vim
+    map <F10> :normal zi<CR>                    " folding on/off
+    set pastetoggle=<F11>                       " toggle ai from outside
+    map <F12> <Esc>:call ChangeSpellLang()<CR>  " map spell on/off for English/Russian
+    
+    map <leader>a :A<CR>                                " alternate c<->h files (current window)
+    map <leader>av :AV<CR>                              " alternate c<->h files (new vertical window)
+    map <leader>ah :AH<CR>                              " alternate c<->h files (new horiz. window)
+    map <leader>f :FufFile **/<CR>                      " open file with completion (Fufu)
+    map <leader>t :FufBufferTagAllWithCursorWord <CR>   " search in tags with completion (Fufu)
+    map <leader>l :set list!<CR>                        " toggle visible whitespace
+    map <leader>n :nohlsearch<CR>                       " turn off search highlighting
+    map <leader>v :sp ~/.vimrc<cr>                      " edit my .vimrc file in a split
+    map <leader>u :source ~/.vimrc<cr>                  " update the system settings from my vimrc
+    map <leader>m :MRU<CR>                              " open mru.vim window
+    map <leader>ft :NERDTreeToggle<CR>                  " Nerd_tree.vim
+    map <leader>tt :TlistToggle<CR>                     " taglist.vim
+    map <leader>bb :buffers<CR>                         " show list of buffers
+    map <leader>bd :bdelete<CR>                         " delete buffer
+    map <leader>bn :bnext<CR>                           " show next
+    map <leader>bp :bprev<CR>                           " show prev
+    "map <leader>mt :ShowMarksToggle                    " show marks
+    "map <leader>ma :ShowMarksClearAll
+    inoremap jj <ESC>                                   " XXX 
+    cnoremap jj <ESC>                                   " XXX
+    imap [ []<LEFT>
+    imap {<CR> {<CR><CR>}<Esc>0<UP>
+    map <C-H> <C-W>h                                    " multi window maps
+    map <C-J> <C-W>j
+    map <C-K> <C-W>k
+    map <C-L> <C-W>l
+    map <C-TAB> <C-W>w
+    nmap <Left>   :echo "You should have typed h instead."<CR>
+    nmap <Right>  :echo "You should have typed l instead."<CR>
+    nmap <Up>     :echo "You should have typed k instead."<CR>
+    nmap <Down>   :echo "You should have typed j instead."<CR>
+    map Q gq        " Don't use Ex mode, use Q for formatting
+                    " XXX CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+                    " so that you can undo CTRL-U after inserting a line break.
+    inoremap <C-U> <C-G>u<C-U>
+" }
+
+" Abbreviations {
+    iab fo of
+    iab hte the
+    iab okya okay
+    iab taht that
+" }
+
+" Functions {
+        " Convenient command to see the difference between the current buffer and the
+        " file it was loaded from, thus the changes you made.
+        " Only define it whzaen not defined already.
+    if !exists(":DiffOrig")
+      command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+                      \ | wincmd p | diffthis
+    endif
+" }
+

@@ -1,0 +1,25 @@
+[user]
+	email = igortsinman@ruggedcom.com
+	name = Igor Tsinman
+[core]
+	editor = vim
+	excludesfile = /home/igortsinman/.gitignore
+[alias]
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+        st = status
+        ci = commit
+        co = checkout
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+        interactive = auto
+	ui = true
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 700x550+1+22
+	main-window-view = HistoryView
+	history-view-vpane-position = 417
+	file-view-vpane-position = 462
+[cola]
+	tabwidth = 4
