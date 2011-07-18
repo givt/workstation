@@ -1,3 +1,5 @@
+#!/bin/bash
+# (C) 2008, givt
 
 git config user.name "Igor Tsinman"
 git config user.email "igor.tsinman@gmail.com"

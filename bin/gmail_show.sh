@@ -1,4 +1,5 @@
 # !/bin/bash
+# (C) 2008, givt
 
 . ${HOME}/.data/gconfig
 

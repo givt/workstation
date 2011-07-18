@@ -1,4 +1,5 @@
 # !/bin/bash
+# (C) 2008, givt
 
 # check gmail 60 min
 interval_check=3600

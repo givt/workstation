@@ -1,4 +1,5 @@
 #!/bin/bash
+# (C) 2010, givt
 
 if [[ $# -gt 0 ]]; then
     echo "run: $(basename ${0})"

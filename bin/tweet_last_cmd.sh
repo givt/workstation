@@ -1,4 +1,5 @@
 #!/bin/bash
+# (C) 2009, givt
 
 history -a
 

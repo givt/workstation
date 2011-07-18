@@ -1,4 +1,5 @@
 #!/bin/bash
+# (C) 2008, givt
 
 messages="/tmp/gmail.msg"
 title=" $(grep -c "" ${messages}) emails in Gmail box"

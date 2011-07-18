@@ -1,4 +1,5 @@
 #!/bin/bash
+# (C) 2010, givt
 
 # When this scipt configures my USER environment, it
 ## checks a new version on github (optinaly)
