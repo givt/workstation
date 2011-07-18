@@ -16,9 +16,10 @@ Another stuff that I use occasionally:
     * READE - this file 
 
 Howto install/update:
+    
+    * Makefile:
 
-    $ git XXX
-    $ sh bin/workstation_bootstrap.sh
+    $ make install # use verbose to more output
+    $ make update  # actually git pull
 
-read more INSTALL
-
+    read more INSTALL
