@@ -19,7 +19,11 @@
 # $ ln -sf /path-to/git_ctags_cscope.sh .git/hooks/post-commit
 # $ ln -sf /path-to/git_ctags_cscope.sh .git/hooks/post-checkout
 #
-# Here is an example run on the project contains N SOCs
+# Here is an example run on the project contains ~19K SLOC:
+#
+# Language  Files       Code    Comment  Comment %      Blank      Total
+# --------- -----  ---------  ---------  ---------  ---------  ---------
+# c            29      18461       1881       9.2%       2418      22760
 #
 # $ time git_ctags_cscope.sh 
 #
