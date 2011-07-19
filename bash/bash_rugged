@@ -5,18 +5,9 @@
 # Rugg setup {
     rdev='192.168.0.2'  # ppc mgmt port
 
-    function tags_generate () {
-        git ls-files|grep "\.[ch]$" >> cscope.files
-        rm -f cscope.out tags
-        cscope -b -q
-        ctags -R --c-kinds=+p --fields=+S -L cscope.files
-        CSCOPE_DB=~/rugg/rmf/cscope.out
-        export CSCOPE_DB
-    }
-
     function mm () {
         pushd ~/rugg/rmf
-        tags_generate
+        git_ctags_cscope.sh
     }
 
     function rooton_rdev () { 
