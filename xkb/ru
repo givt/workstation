@@ -1,10 +1,5 @@
 // $XKeyboardConfig$
 
-// 2009/10/12 by givt
-// make a link to /usr/share/X11/xkb/symbols/ru
-// $ sudo mv /usr/share/X11/xkb/symbols/ru /usr/share/X11/xkb/symbols/ru.ORIG
-// $ ln -sf xkb/ru /usr/share/X11/xkb/symbols/ru 
-
 // based on
 // russian standard keyboard
 // AEN <aen@logic.ru>
@@ -211,7 +206,7 @@ xkb_symbols "phonetic" {
 
     key	<AD11> {	[    Cyrillic_sha,    Cyrillic_SHA	]	};
     key	<AE12> {	[    Cyrillic_che,    Cyrillic_CHE	]	};
-    key	<AD12> {	[  	    equal,  	      plus	]	};
+    key	<AD12> {	[  Cyrillic_shcha,  Cyrillic_SHCHA	]	};
     key	<BKSL> {	[      Cyrillic_e,	Cyrillic_E	]	};
 };
 
