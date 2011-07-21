@@ -153,3 +153,7 @@
         /bin/ps $@ | ccze -A
     }
 # }
+#
+# Igor's helper aliases {
+    alias ww='pushd ${HOME}/.workstation'
+# }
