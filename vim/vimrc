@@ -167,9 +167,6 @@
     set fo+=cr              " fix <Enter> for comment
     if &diff|syntax off|endif " I'm only interested in diff colours
     set tags+=./tags,tags,~/tags,~/rugg/rmf,~/rugg/rmf/tags "path to ctags files
-    
-    highlight TooLongLine term=reverse ctermfg=Yellow ctermbg=Red
-    match TooLongLine /.\%>81v/ " Match characters past 80 character limitground
 " }
 
 " Spelling correction settings {
