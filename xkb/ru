@@ -218,7 +218,7 @@ xkb_symbols "phonetic_winkeys" {
 
     key	<LatX> {	[     Cyrillic_ha,     Cyrillic_HA	]	};
     key	<LatH> {	[     Cyrillic_che,   Cyrillic_CHE	]	};
-    key	<AC10> {	[	Cyrillic_e,     Cyrillic_E	]       };
+    key	<AC10> {	[	Cyrillic_e,          colon	]       };
     key	<AC11> {	[ Cyrillic_softsign, 	  quotedbl	]	};
     key	<AB10> {	[	Cyrillic_yu,	  question	]	};
 
