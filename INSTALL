@@ -1,0 +1,7 @@
+1. To install just issue:
+
+$ make install
+
+2. To update the repo:
+
+$ make update
